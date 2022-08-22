@@ -1,1 +1,1 @@
-# fit_vut-wis-study-materials-downloader
+VUT FIT WIS Study Materials Downloader
