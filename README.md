@@ -1,1 +1,1 @@
-VUT FIT WIS Study Materials Downloader
+# VUT FIT WIS Study Materials Downloader
