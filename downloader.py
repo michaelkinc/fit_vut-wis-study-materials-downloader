@@ -1,4 +1,4 @@
-from parser import Parser
+from subject_parser import Parser
 from connection import Connection
 import os
 import sys
