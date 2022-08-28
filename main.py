@@ -1,6 +1,7 @@
 from connection import Connection
 from downloader import Downloader
 from termcolor import colored
+from getpass import getpass
 import sys
 import getopt
 
@@ -15,7 +16,7 @@ def run():
 
 def get_credentials() -> (str, str):
     username = input(colored("Your login: ", "yellow"))
-    password = input(colored("WIS password: ", "yellow"))
+    password = getpass(colored("WIS password: ", "yellow"))
     print("-----------------------------------------------------------")
     return username, password
 
