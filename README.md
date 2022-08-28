@@ -16,3 +16,7 @@ pipenv install
 pipenv run python main.py [-p path]
 ```
 - If *-p* is not set, study materials are downloaded to folder, where this script is located 
+
+### Tested on
+- Windows 11
+- macOS Monterey
