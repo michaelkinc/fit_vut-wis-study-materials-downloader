@@ -4,6 +4,7 @@ import os
 import sys
 import re
 from termcolor import colored
+import shutil
 
 
 class Downloader:
@@ -33,11 +34,26 @@ class Downloader:
         print(colored("Downloading of "+str(self.count)+" courses...", "cyan"))
         print("-----------------------------------------------------------")
         if os.path.exists(self.root) and os.path.isdir(self.root):
-            os.system("rm -r "+self.root)
-        os.system("mkdir "+self.root)
+            try:
+                shutil.rmtree(self.root)
+            except OSError as error:
+                print(error)
+                print("Root directory '%s' and it's components cannot be removed", self.root)
+
+        try:
+            os.mkdir(self.root)
+        except OSError as error:
+            print(error)
+            print("Root directory '%s' cannot be created", self.root)
+        
         for abbrev in self.abbreviations:
             content = self.connection.get_contents(self.url+"/"+abbrev)
-            os.system("mkdir "+self.root+"/"+abbrev)
+            try:
+                os.mkdir(self.root+"/"+abbrev)
+            except OSError as error:
+                print(error)
+                print("Subject directory '%s' cannot be created", self.root+"/"+abbrev)
+            
             self._process_subject(content, abbrev)
         print(colored("Downloading of " + str(self.count) + " courses is completed.", "green"))
         print("-----------------------------------------------------------")
@@ -61,7 +77,13 @@ class Downloader:
         folder_content = parser.get_subject_materials_folder_dictionary()
         if folder_content is None:
             return
-        os.system("mkdir " + self.root + path)
+
+        try:
+            os.mkdir(self.root+path)
+        except OSError as error:
+            print(error)
+            print("Directory '%s' cannot be created", self.root+path)
+        
         for key, value in folder_content.items():
             if value == "yes":
                 new_page_content = self.connection.get_contents(self.url+path+"/"+key)
