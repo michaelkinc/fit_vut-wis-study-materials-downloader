@@ -20,3 +20,4 @@ pipenv run python main.py [-p path]
 ### Tested on
 - Windows 11
 - macOS Monterey
+- Raspberry Pi
